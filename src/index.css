@@ -1,0 +1,195 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@layer base {
+  :root {
+    /* Dark luxurious theme with warm accents */
+    --background: 20 14% 6%;
+    --foreground: 40 30% 95%;
+
+    --card: 20 12% 10%;
+    --card-foreground: 40 30% 95%;
+
+    --popover: 20 12% 10%;
+    --popover-foreground: 40 30% 95%;
+
+    /* Warm amber/gold primary */
+    --primary: 38 92% 50%;
+    --primary-foreground: 20 14% 6%;
+
+    --secondary: 20 12% 16%;
+    --secondary-foreground: 40 30% 90%;
+
+    --muted: 20 10% 18%;
+    --muted-foreground: 40 10% 60%;
+
+    /* Warm accent */
+    --accent: 25 85% 55%;
+    --accent-foreground: 20 14% 6%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 40 30% 95%;
+
+    --border: 20 15% 20%;
+    --input: 20 15% 18%;
+    --ring: 38 92% 50%;
+
+    --radius: 0.75rem;
+
+    /* Custom design tokens */
+    --gold: 38 92% 50%;
+    --gold-light: 40 90% 65%;
+    --gold-dark: 35 90% 40%;
+    --cream: 40 30% 95%;
+    --charcoal: 20 14% 6%;
+    --charcoal-light: 20 12% 12%;
+    --ember: 15 85% 50%;
+    --ember-glow: 15 100% 60%;
+
+    /* Gradients */
+    --gradient-gold: linear-gradient(135deg, hsl(38, 92%, 50%), hsl(25, 85%, 55%));
+    --gradient-dark: linear-gradient(180deg, hsl(20, 14%, 6%), hsl(20, 12%, 10%));
+    --gradient-glass: linear-gradient(135deg, hsla(40, 30%, 95%, 0.1), hsla(40, 30%, 95%, 0.02));
+    --gradient-ember: linear-gradient(135deg, hsl(15, 85%, 50%), hsl(38, 92%, 50%));
+    --gradient-hero: radial-gradient(ellipse at top, hsl(20, 12%, 12%), hsl(20, 14%, 6%));
+
+    /* Shadows */
+    --shadow-glow: 0 0 60px -15px hsl(38, 92%, 50%, 0.4);
+    --shadow-card: 0 10px 40px -10px hsl(0, 0%, 0%, 0.5);
+    --shadow-ember: 0 0 80px -20px hsl(15, 85%, 50%, 0.3);
+
+    /* Sidebar */
+    --sidebar-background: 20 12% 8%;
+    --sidebar-foreground: 40 30% 90%;
+    --sidebar-primary: 38 92% 50%;
+    --sidebar-primary-foreground: 20 14% 6%;
+    --sidebar-accent: 20 12% 14%;
+    --sidebar-accent-foreground: 40 30% 90%;
+    --sidebar-border: 20 15% 18%;
+    --sidebar-ring: 38 92% 50%;
+  }
+
+  .dark {
+    --background: 20 14% 6%;
+    --foreground: 40 30% 95%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+  }
+}
+
+@layer components {
+  /* Glass morphism card */
+  .glass-card {
+    @apply bg-gradient-to-br from-white/10 to-white/[0.02] backdrop-blur-xl border border-white/10 rounded-2xl;
+  }
+
+  /* Glow effect */
+  .glow-gold {
+    box-shadow: var(--shadow-glow);
+  }
+
+  .glow-ember {
+    box-shadow: var(--shadow-ember);
+  }
+
+  /* Gradient text */
+  .text-gradient-gold {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-gold);
+  }
+
+  .text-gradient-ember {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-ember);
+  }
+
+  /* Hero background */
+  .hero-gradient {
+    background: var(--gradient-hero);
+  }
+
+  /* Animated underline */
+  .animated-underline {
+    @apply relative;
+  }
+
+  .animated-underline::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300;
+  }
+
+  .animated-underline:hover::after {
+    @apply w-full;
+  }
+
+  /* Premium button gradient */
+  .btn-gradient {
+    background: var(--gradient-gold);
+    @apply text-primary-foreground font-semibold;
+  }
+
+  .btn-gradient:hover {
+    background: var(--gradient-ember);
+  }
+
+  /* Star rating */
+  .star-filled {
+    @apply text-primary;
+  }
+
+  .star-empty {
+    @apply text-muted-foreground/30;
+  }
+}
+
+@layer utilities {
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-glow-pulse {
+    animation: glow-pulse 3s ease-in-out infinite;
+  }
+
+  .animate-shimmer {
+    animation: shimmer 2s linear infinite;
+    background: linear-gradient(
+      90deg,
+      hsl(var(--muted)) 0%,
+      hsl(var(--muted-foreground) / 0.1) 50%,
+      hsl(var(--muted)) 100%
+    );
+    background-size: 200% 100%;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+  }
+
+  @keyframes glow-pulse {
+    0%, 100% { box-shadow: 0 0 30px -10px hsl(38, 92%, 50%, 0.4); }
+    50% { box-shadow: 0 0 60px -10px hsl(38, 92%, 50%, 0.6); }
+  }
+
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+}
